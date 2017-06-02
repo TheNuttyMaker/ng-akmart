@@ -1,0 +1,20 @@
+.triangular-toolbar {
+    &.ng-enter {
+        transition: .5s;
+    }
+    &.ng-enter {
+        @include slideInDown();
+    }
+    &.ng-leave {
+        display: none;
+    }
+}
+
+.img1 {
+    max-width: 40px;
+    max-height: 64px;
+    vertical-align: top;
+    margin-right: 4px;
+    -webkit-transform: translateX(-4px);
+    transform: translateX(-4px);
+}

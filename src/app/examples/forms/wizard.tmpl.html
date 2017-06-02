@@ -1,0 +1,125 @@
+<div>
+
+    <div layout="row" layout-align="center center">
+        <p flex="70" flex-xs="90" class="md-headline font-weight-300 text-center text-light"></p>
+    </div>
+
+    <div flex layout="row" layout-align="center center" layout-fill>
+        <md-card flex="90" class="tri-wizard-card md-whiteframe-z1 margin-bottom-100" tri-wizard>
+            <md-toolbar class="md-primary">
+                <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                    <h2>CHECKOUT</h2>
+                    <h2> {{WizardController.progress}}% <span translate>Complete</span></h2>
+                </div>
+                <md-progress-linear class="md-accent padding-bottom-10" md-mode="determinate" ng-value="WizardController.progress"></md-progress-linear>
+            </md-toolbar>
+            <md-card-content>
+                <md-tabs class="md-primary" layout-fill md-selected="WizardController.selectedTab" md-dynamic-height>
+                    <md-tab id="account">
+                        <md-tab-label>
+                            <span class="oxy-step-label">1</span>
+                            <span translate>Login Account details</span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <md-content class="md-padding">
+                                    <div class="padding-40" flex layout="column" layout-align="center center">
+                                        <h2 class="md-title">
+                                            <md-icon md-font-icon="zmdi zmdi-account"> </md-icon> {{WizardController.user.name}}</h2>
+                                        <h2 class="md-title" translate>Logged in as {{WizardController.user.email}} </h2>
+                                    </div>
+                                </md-content>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab id="address">
+                        <md-tab-label>
+                            <span class="oxy-step-label">2</span>
+                            <span translate>Your address</span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <form name="addressForm" tri-wizard-form>
+                                    <div>
+                                        <div layout layout-xs="column" flex>
+                                            <md-input-container flex>
+                                                <label translate>Name</label>
+                                                <input name="name" ng-model="WizardController.data.address.name" required>
+                                                <div ng-messages="addressForm.name.$error" md-auto-hide="false" ng-show="addressForm.name.$touched">
+                                                    <div ng-message when="required">
+                                                        <span translate>Please enter your Name </span>
+                                                    </div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                        <md-input-container class="md-block">
+                                            <label translate>Address</label>
+                                            <input name="address" ng-model="WizardController.data.address.address" required>
+                                            <div ng-messages="addressForm.address.$error" md-auto-hide="false" ng-show="addressForm.address.$touched">
+                                                <div ng-message when="required">
+                                                    <span translate>Please enter your address </span>
+                                                </div>
+                                            </div>
+                                        </md-input-container>
+                                        <div layout layout-xs="column" flex>
+                                            <md-input-container flex>
+                                                <label>Mobile No.</label>
+                                                <input ng-model="WizardController.data.address.phone" name="phone" required md-maxlength="10" ng-pattern="/^\d{10}$/">
+                                                <div ng-messages="addressForm.phone.$error" md-auto-hide="true" ng-show="addressForm.phone.$touched">
+                                                    <div ng-message when="required">
+                                                        <span translate>Please enter your phone No. </span>
+                                                    </div>
+                                                    <div ng-message when="md-maxlength">The Mobile number should be 10 digit long!.</div>
+                                                </div>
+                                            </md-input-container>
+                                            <md-input-container flex>
+                                                <label translate>City</label>
+                                                <input name="city" ng-model="WizardController.data.address.city" required>
+                                                <div ng-messages="addressForm.city.$error" md-auto-hide="false" ng-show="addressForm.city.$touched">
+                                                    <div ng-message when="required">
+                                                        <span translate>Please enter your city </span>
+                                                    </div>
+                                                </div>
+                                            </md-input-container>
+
+                                        </div>
+                                    </div>
+                                </form>
+                                <pre>{{WizardController.getTotalPrice()}}</pre>
+                                <!--<md-card flex>
+                                    <md-card-content>
+                                        <h2>JSON</h2>
+                                        <pre>{{WizardController.cartItems | json }}</pre>
+                                        <pre> hehe {{Order | json }}</pre>
+                                        <pre>{{ WizardController.user  | json}}</pre>
+                                        <pre>{{WizardController.data | json}}</pre>
+                                    </md-card-content>
+                                </md-card>-->
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab id="confirm" ng-disabled="WizardController.confirmTab">
+                        <md-tab-label>
+                            <span class="oxy-step-label">3</span>
+                            <span translate>Confirmation</span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <div class="padding-40" flex layout="column" layout-align="center center">
+                                    <md-icon class="big-icon" md-font-icon="zmdi zmdi-check-circle"></md-icon>
+                                    <h2 class="md-display-2" translate>Congratulations - Your order has been placed successfully!</h2>
+                                </div>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-primary md-raised" ng-click="WizardController.prevStep()" ng-hide="WizardController.prevHide()" ng-disabled="WizardController.prevStepDisabled()" translate="Previous"></md-button>
+                <md-button class="md-primary md-raised" ng-click="WizardController.nextStep()" ng-hide="WizardController.selectedTab != 0" translate="Next"></md-button>
+                <md-button class="md-accent md-raised" ng-click="WizardController.cod()" ng-show="WizardController.selectedTab == 1 " ng-disabled="addressForm.$invalid">Place Cash On Delivery Order</md-button>
+                <md-button class="md-accent md-raised" ng-click="WizardController.homeState()" ng-show="WizardController.selectedTab == 2 ">Shop More</md-button>
+            </md-card-actions>
+    </div>
+    </md-card>
+</div>

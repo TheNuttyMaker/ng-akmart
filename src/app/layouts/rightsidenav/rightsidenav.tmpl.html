@@ -1,0 +1,128 @@
+<md-content flex layout class="admin-notifications">
+    <md-tabs flex md-stretch-tabs="always" md-selected="vm.currentTab">
+        <md-tab>
+            <md-tab-label>
+                <md-icon md-font-icon="zmdi zmdi-shopping-cart"></md-icon>
+            </md-tab-label>
+            <md-tab-body>
+                <md-content>
+                    <md-list class="md-dense" ng-if="!isLoggedIn()">
+                        <md-subheader class="md-primary">Cart</md-subheader>
+                        <md-list-item class="md-2-line">
+                            {{vm.cart}}
+                        </md-list-item>
+                    </md-list>
+                    <md-list class="md-dense" ng-if="isLoggedIn()">
+                        <md-subheader style="background-color:crimson; color:white;" class="md-focused ">
+                            <button ng-click="vm.checkoutState()" style="  outline:none; border: 0;  background-color: crimson;    color: #fff;    line-height: 2rem;    width: 100%;">CHECKOUT
+                                <md-icon md-font-icon="fa fa-long-arrow-right"></md-icon>
+                            </button>
+                        </md-subheader>
+                        <md-divider></md-divider>
+                        <md-subheader class="md-primary">Cart</md-subheader>
+                        <!--<pre>{{Orders | json}}</pre>-->
+
+                        <md-list-item ng-if="isLoggedIn()" class="md-2-line" ng-repeat="cartItem in cart.items">
+                            <img class="md-avatar" ng-src="{{cartItem.image}}" alt="{{cartItem.name}}">
+                            <div class="md-list-item-text">
+                                <!--                                <h3>{{::cartItem.from.name}}</h3>
+                                <h4>{{::cartItem.subject}}</h4>
+                                <p class="md-caption" am-time-ago="::cartItem.date"></p>-->
+                                <h3>{{::cartItem.name}}</h3>
+                                <h4>{{::cartItem.price | currency : '&#8377;'}}</h4>
+                                <span>
+                                    <md-icon md-font-icon="zmdi newbtn zmdi-minus-circle-outline" ng-click="vm.dec(cartItem)"></md-icon>
+                                    {{cartItem.quantity}}
+                                    <md-icon md-font-icon="zmdi newbtn zmdi-plus-circle-o" ng-click="vm.inc(cartItem)"></md-icon>                                    
+                                </span>
+                                <!--<p class="md-caption" am-time-ago="::cartItem.date"></p>-->
+                            </div>
+                            <md-divider ng-hide="$last"></md-divider>
+                        </md-list-item>
+                        <md-divider></md-divider>
+                        <md-divider></md-divider>
+                        <md-list-item>
+
+                            <div flex="50" layout="column" layout-align="center start">
+                                <div class="md-body-1">Delivery</div>
+                                <div class="md-body-1">Tax</div>
+                                <div class="md-title">Total</div>
+                            </div>
+                            <div flex="50" layout="column" layout-align="center start">
+                                <div class="md-body-1">FREE</div>
+                                <div class="md-body-1">0%</div>
+                                <div class="md-title">{{vm.getTotalPrice() | currency : '&#8377;'}}</div>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+        <md-tab>
+            <md-tab-label>
+                <md-icon md-font-icon="zmdi zmdi-receipt"></md-icon>
+            </md-tab-label>
+
+
+            <md-tab-body>
+                <md-content>
+                    <md-list class="md-dense">
+                        <md-subheader class="md-primary" style="background-color: crimson; color: white; position: sticky; top: 0px; z-index: 2;">Orders</md-subheader>
+                        <md-list-item ng-if="!isLoggedIn()" class="md-2-line">
+                            {{vm.order}}
+                        </md-list-item>
+                        <div ng-if="isLoggedIn()" ng-repeat="o in Orders | orderBy : 'orderDate' : 'reverse'">
+                            <md-subheader class="md-primary">
+                                <div flex="100" layout="column" layout-align="center start">
+                                    <div class="md-body-1">Order No. {{o.orderNo}}</div>
+                                    <div class="md-body-1">{{o.orderDate | amCalendar}}</div>
+                                </div>
+
+
+                            </md-subheader>
+                            <md-list-item ng-if="isLoggedIn()" class="md-2-line" ng-repeat="cartItem in o.items">
+                                <img class="md-avatar" ng-src="{{cartItem.image}}" alt="{{cartItem.name}}">
+                                <div class="md-list-item-text">
+                                    <!--                                <h3>{{::cartItem.from.name}}</h3>
+                                <h4>{{::cartItem.subject}}</h4>
+                                <p class="md-caption" am-time-ago="::cartItem.date"></p>-->
+                                    <h3>{{::cartItem.name}}</h3>
+                                    <span>
+                                <h4>{{::cartItem.price | currency : '&#8377;'}}</h4>
+                                <span ng-class="'status-' + o.status.name" class="labels  right">{{::o.status.name}}</span>
+                                    </span>
+                                    <!--<p class="md-caption" am-time-ago="::cartItem.date"></p>-->
+                                </div>
+                                <md-divider ng-hide="$last"></md-divider>
+                            </md-list-item>
+                        </div>
+                    </md-list>
+                </md-content>
+            </md-tab-body>
+
+            <!--            <md-tab-body>
+                <md-content>
+                    <md-list>
+                        <div ng-if="!isLoggedIn()">
+                            <md-subheader class="md-primary"> Orders</md-subheader>
+                            <md-list-item class="md-2-line">
+                                {{::vm.order}}
+                            </md-list-item>
+                        </div>
+
+
+                        <div ng-if="isLoggedIn()" ng-repeat="group in ::vm.notificationGroups">
+                            <md-subheader class="md-primary">{{::group.name}} </md-subheader>
+                            <md-list-item ng-repeat="notification in ::group.notifications" layout="row" layout-align="space-between center">
+                                <md-icon md-font-icon="{{::notification.icon}}" ng-style="{ color: notification.iconColor }"></md-icon>
+                                <p>{{::notification.title}}</p>
+                                <span class="md-caption">{{::notification.price | currency : '&#8377;'}}</span>
+                            </md-list-item>
+                        </div>
+                    </md-list>
+                </md-content>
+            </md-tab-body>-->
+        </md-tab>
+    </md-tabs>
+</md-content>

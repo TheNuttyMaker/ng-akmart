@@ -1,0 +1,50 @@
+<div class="todo-container">
+    <div layout-fill layout="row" layout-align="center center">
+        <md-card flex="70" flex-xs="90" class="margin-top-50 margin-bottom-50 md-whiteframe-z4">
+            <md-toolbar md-theme="{{triSkin.elements.content}}">
+                <h2 class="md-toolbar-tools" translate> Add new exciting offers here to attract more customers.</h2>
+            </md-toolbar>
+            <md-card-content class="overflow-auto">
+                <md-list class="margin-bottom-10">
+                    <md-list-item ng-repeat="todo in vm.todos | orderBy:vm.orderTodos" ng-class="{'md-primary': todo.priority === 'high', 'md-accent': todo.priority === 'medium', 'md-warn': todo.priority === 'low'}" class="slide" md-swipe-right="vm.removeTodo(todo)" md-no-ink>
+                        <md-checkbox ng-model="todo.selected" ng-change="vm.todoSelected(todo)"></md-checkbox>
+                        <p class="">
+                            {{::todo.description}}
+                        </p>
+                        <p flex class="md-secondary">
+                            <md-icon ng-click="vm.removeTodo(todo)" style="color:#FF4081" md-font-icon="zmdi zmdi-close"></md-icon>
+                        </p>
+                    </md-list-item>
+                    </md-list-item>
+                    <form ng-submit="vm.addTodo(vm.item)">
+                        <div layout="row" layout-align="space-between center">
+
+                            <md-input-container flex class="margin-left-20 margin-right-20">
+                                <label>Add New Offer</label>
+                                <input ng-model="vm.item.description" type="text">
+                            </md-input-container>
+                            <md-input-container>
+                                <md-button type="submit" class="md-fab" aria-label="Add offer">
+                                    <md-icon md-font-icon="zmdi zmdi-mail-send"></md-icon>
+                                </md-button>
+                            </md-input-container>
+                        </div>
+                    </form>
+                </md-list>
+                </md-list>
+            </md-card-content>
+        </md-card>
+    </div>
+
+
+    <div layout-fill layout="row" layout-align="center center">
+        <md-card flex="70" flex-xs="90" class="margin-top-20 margin-bottom-20">
+            <md-toolbar md-theme="{{triSkin.elements.content}}">
+                <h2 class="md-toolbar-tools" translate>Note</h2>
+            </md-toolbar>
+            <md-card-content>
+                <p translate>Remove offers from the list by swiping right</p>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>

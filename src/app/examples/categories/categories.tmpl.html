@@ -1,0 +1,97 @@
+<md-content class="groceries-gallery-container">
+    <md-list>
+        <div>
+            <md-subheader> Header </md-subheader>
+            <div>
+                <div class="products products--grid">
+                    <div ng-repeat="product in ::vm.products">
+                        <div class="product__wrapper">
+                            <div class="plp-product">
+                                <div style="outline:none; border: 0" ng-click="vm.openImage(product, $event)">
+                                    <div ng-if="product.disc" class="plp-product__sale-badge"></div>
+                                    <div ng-if="product.disc" class="plp-product__offer">
+                                        {{::product.disc}}% Off
+
+                                    </div>
+                                    <div class="plp-product__img"><img class="img animated fadeIn" ng-src="{{::product.image}}">
+                                    </div>
+                                    <div class="plp-product__name">
+                                        <div class="LinesEllipsis LinesEllipsis--clamped plp-product__name--box">
+                                            {{::product.name}}
+                                            <wbr>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="plp-product__quantity"><span>{{::product.unit}}</span>
+                                </div>
+                                <div class="plp-product__price">
+                                    <div class="plp-product__price--container">
+                                        <div ng-if="product.disc" class="plp-product__price--old display--inline-block@mobile">
+                                            ₹ {{::product.mrp}}
+
+                                        </div>
+                                        <div class="plp-product__price--new display--inline-block@mobile">
+                                            ₹ {{::product.price}}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="plp-product__addition-to-cart">
+                                    <div class="addition-to-cart">
+                                        <button ng-cloak ng-hide="vm.checkCart(product.product_id)" class="addition-to-cart__dec display--inline-block" ng-click="vm.addToCart(product, -1)"></button>
+                                        <button ng-cloak ng-show="vm.checkCart(product.product_id)" class="addition-to-cart__add-btn display--inline-block" ng-click="vm.addToCart(product, 1)">Add To Cart</button>
+                                        <button ng-cloak ng-hide="vm.checkCart(product.product_id)" class="addition-to-cart__quantity display--inline-block ">{{ vm.getQuantity(product.product_id)}}</button>
+                                        <button ng-cloak ng-hide="vm.checkCart(product.product_id)" class="addition-to-cart__inc display--inline-block add" ng-click="vm.addToCart(product, 1)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-bottom products-bottom--small"></div>
+            </div>
+        </div>
+    </md-list>
+</md-content>
+
+<!--<md-card>
+            <img src="assets/images/backgrounds/material-backgrounds/mb-bg-03.jpg" alt="Card Image">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Icon Actions</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, distinctio minus nostrum aut magni ipsam, eius ipsa eos voluptate natus excepturi qui numquam velit non explicabo molestias quasi sunt veniam.</p>
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-icon-button" aria-label="Facebook">
+                    <md-icon md-font-icon="fa fa-facebook"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Twitter">
+                    <md-icon md-font-icon="fa fa-twitter"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="GooglePlus">
+                    <md-icon md-font-icon="fa fa-google-plus"></md-icon>
+                </md-button>
+            </md-card-actions>
+        </md-card>-->
+
+
+<!--<md-content class="groceries-gallery-container">
+    <md-list>
+        <div>
+            <md-subheader> Header </md-subheader>
+            <md-list-item>
+                <md-grid-list flex md-cols="6" md-cols-xs="4" md-row-height="4:3" md-gutter="4px">
+                    <md-grid-tile ng-click="vm.openImage(product.name, product.image, $event)" md-rowspan="2" md-colspan="2" ng-repeat="product in ::vm.products" ng-style="::{ 'background-image': 'url(' + product.image + ')', 'background-size' : 'cover' }">
+                        <md-grid-tile-footer>
+                            <h3>{{::product.name}}</h3>
+                        </md-grid-tile-footer>
+                    </md-grid-tile>
+                </md-grid-list>
+            </md-list-item>
+        </div>
+    </md-list>
+</md-content>        -->

@@ -1,0 +1,25 @@
+<md-toolbar class="sidebar-left-toolbar" md-theme="{{::triSkin.elements.logo}}">
+    <div class="md-toolbar-tools" layout="row" layout-align="start center">
+
+        <div class="sidebar-left-logo" style="outline:none; border: 0; cursor:pointer" ng-click="vm.homeState()">
+            <a> <img style="min-width : 34px;" ng-src="{{::vm.sidebarInfo.appLogo}}" alt="{{::vm.sidebarInfo.appName}}"> </a>
+        </div>
+
+        <h2 ng-click="vm.homeState()" style="outline:none; border: 0; padding-left:25px;  cursor:pointer" flex class="sidebar-left-title">
+            <md-tooltip md-direction="bottom">Click to go to Main Page</md-tooltip>
+            Food Mart
+        </h2>
+
+        <!--<md-button class="md-icon-button sidebar-left-icon" ng-click="vm.toggleIconMenu()" aria-label="Open side menu">
+            <md-tooltip md-direction="bottom">Click for ICON menu</md-tooltip>hi
+            <md-icon md-font-icon ng-class="{ 'zmdi zmdi-chevron-right' : vm.layout.sideMenuSize == 'icon', 'zmdi zmdi-chevron-left' : vm.layout.sideMenuSize == 'full' }"></md-icon>
+        </md-button>-->
+        <md-button class="md-icon-button sidebar-left-icon" ng-click="vm.toggleIconMenu()" aria-label="Open side menu">
+            <md-tooltip md-direction="bottom">Click for ICON menu</md-tooltip>
+            <md-icon md-font-icon ng-class="{ 'zmdi zmdi-chevron-right' : vm.layout.sideMenuSize == 'icon', 'zmdi zmdi-chevron-left' : vm.layout.sideMenuSize == 'full' }"></md-icon>
+        </md-button>
+
+    </div>
+</md-toolbar>
+
+<tri-menu md-theme="{{triSkin.elements.sidebar}}" flex layout="column"></tri-menu>

@@ -1,0 +1,51 @@
+<md-dialog aria-label="{{vmtitle}}">
+    <md-dialog-content class="md-dialog-content groceries-image-dialog">
+        <div ng-if="vm.product.disc" class="ribbon sale">
+            <div class="theribbon">SALE</div>
+            <div class="ribbon-background"></div>
+        </div>
+        <div layout="row" layout-xs="column">
+            <div flex>
+                <img ng-src="{{vm.product.image}}" alt="{{vm.title}}">
+            </div>
+            <div flex>
+                <p class="md-title">{{vm.product.name}}</p>
+                <div layout="row" layout-align="space-between center">
+                    <div flex>
+                        <p style="color: #51aa1b;"> {{vm.product.disc}}% Off</p>
+                        <p style="    color: #999;    padding-right: 10px; text-decoration: line-through;"> ₹ {{vm.product.mrp}}</p>
+
+                    </div>
+                    <div flex>
+                        <p style="    color: #999;"> {{vm.product.unit}}</p>
+                        <p style="    color: #333;    font-weight: 500;"> ₹ {{vm.product.price}}</p>
+
+                    </div>
+
+                    <!--<div flex="50" layout="column" layout-align="center start">
+                        <div class="md-body-1">Delivery</div>
+                        <div class="md-body-1">Tax</div>
+                        <div class="md-title">Total</div>
+                    </div>
+                    <div flex="50" layout="column" layout-align="center start">
+                        <div class="md-body-1">FREE</div>
+                        <div class="md-body-1">0%</div>
+                        <div class="md-title">{{vm.getTotalPrice() | currency : '&#8377;'}}</div>
+                    </div>-->
+                </div>
+                <!--<md-button class="md-raised md-primary" ng-click="vm.addToCart(product, 1)">ADD TO CART</md-button>-->
+            </div>
+        </div>
+
+    </md-dialog-content>
+    <!--<md-dialog-actions layout="row">
+        {{vm.product.name}}
+        <span flex></span>
+        <md-button ng-click="vm.prev()" class="md-icon-button" aria-label="Close">
+            <md-icon md-font-icon="zmdi zmdi-chevron-left"></md-icon>
+        </md-button>
+        <md-button ng-click="vm.next()" class="md-icon-button" aria-label="Close">
+            <md-icon md-font-icon="zmdi zmdi-chevron-right"></md-icon>
+        </md-button>
+    </md-dialog-actions>-->
+</md-dialog>
