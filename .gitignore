@@ -1,0 +1,11 @@
+node_modules/
+.sass-cache/
+.tmp/
+dist/
+bower_components/
+src/
+sales/
+src17MAy/
+srcBKP/
+.idea/
+src30MaySynchronizedAppissue/
