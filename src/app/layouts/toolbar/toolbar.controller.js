@@ -29,6 +29,7 @@
         vm.showLoginDialog = showLoginDialog;
         vm.logout = logout;
         vm.login = false;
+        vm.toggleSearch = toggleSearch;
         vm.getCurrentUser = Auth.getCurrentUser;
         // vm.checkCart = checkCart;
         $rootScope.cart = Cart.cart;
@@ -46,6 +47,10 @@
         console.log("log in inside cntroller bahar" + $rootScope.isLoggedIn());
         if ($rootScope.isLoggedIn()) {
             console.log("log in inside cntroller" + $rootScope.isLoggedIn());
+        }
+
+        function toggleSearch() {
+            vm.showSearch = !vm.showSearch;
         }
 
         // if ($injector.has('UserService')) {

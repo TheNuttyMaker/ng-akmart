@@ -11,27 +11,18 @@
         </span>
     </h2>
 
+    <md-button class="md-icon-button" ng-click="vm.toggleSearch()" aria-label="{{'Toggle Menu' | triTranslate}}">
+        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+    </md-button>
+
+    <input class="toolbar-search" ng-show="vm.showSearch" ng-model="emailSearch" ng-change="vm.filterEmailList(emailSearch)" type="text" placeholder="{{'Search' | triTranslate}}">
+
+
     <md-button class="md-icon-button toolbar-button" ng-click="vm.toggleFullScreen()" aria-label="toggle fullscreen">
         <md-tooltip md-direction="left">Fullscreen</md-tooltip>
         <md-icon md-font-icon ng-class="vm.fullScreenIcon"></md-icon>
     </md-button>
 
-    <!--    <md-button class="md-icon-button" ng-click="vm.toggleFullScreen()" aria-label="toggle fullscreen">
-        <md-icon md-font-icon="zmdi zmdi-account-o"></md-icon>
-    </md-button>-->
-
-    <!--<md-menu ng-show="vm.languages.length > 0">
-        <md-button class="md-icon-button" aria-label="language" ng-click="$mdOpenMenu()" aria-label="change language">
-            <md-icon md-font-icon="zmdi zmdi-globe-alt"></md-icon>
-        </md-button>
-        <md-menu-content width="3">
-            <md-menu-item ng-repeat="language in ::vm.languages">
-                <md-button ng-click="vm.switchLanguage(language.key)" translate="{{::language.name}}" aria-label="{{::language.name}}"></md-button>
-            </md-menu-item>
-        </md-menu-content>
-    </md-menu>-->
-    <!--<pre>{{isLoggedIn()}}</pre>
-    <pre>{{totalQuantity}}</pre>-->
     <md-button style="height:60px; width:60px" class="md-icon-button toolbar-button animated" ng-click="vm.toggleNotificationsTab(0)" aria-label="side navigation">
         <md-tooltip md-direction="bottom">Shopping Cart</md-tooltip>
         <md-icon md-font-icon="zmdi zmdi-shopping-cart"></md-icon>
@@ -65,7 +56,7 @@
         </md-menu-content>
     </md-menu>
 
-    <md-button ng-if="!isLoggedIn()" ng-click="vm.showLoginDialog($event)" aria-label="toggle fullscreen">
+    <md-button ng-if="!isLoggedIn()" ng-click="vm.showLoginDialog($event)" aria-label="Login">
         <md-tooltip md-direction="left">Login/Register</md-tooltip>
         <md-icon md-font-icon="zmdi zmdi-account-circle"></md-icon> Login
     </md-button>
